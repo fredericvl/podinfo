@@ -247,6 +247,9 @@ func (s *Server) startServer() *http.Server {
 		Handler:      s.handler,
 	}
 
+	// disable keep-alive
+	srv.SetKeepAlivesEnabled(false)
+
 	// start the server in the background
 	go func() {
 		s.logger.Info("Starting HTTP Server.", zap.String("addr", srv.Addr))
